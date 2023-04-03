@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class BloodDrive extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'location',
+        'date',
+        'hospital_id',
+        'hasMinimumDonors',
+        'status'
+    ];
 }
