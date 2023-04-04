@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\BloodType;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class BloodTypeSeeder extends Seeder
 {
@@ -14,6 +15,21 @@ class BloodTypeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $bloodTypes = [
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "AB+",
+            "AB-",
+            "O+",
+            "O-",
+        ];
+
+        foreach ($bloodTypes as $bloodType) {
+            BloodType::create([
+                'name' => $bloodType,
+            ]);
+        }
     }
 }
