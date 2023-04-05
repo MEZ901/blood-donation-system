@@ -23,7 +23,6 @@ class CitySeeder extends Seeder
             'Médiouna',
             'Mohammadia',
             'Tit Mellil',
-            'Ben Yakhlef',
             'Bejaâd',
             'Ben Ahmed',
             'Benslimane',

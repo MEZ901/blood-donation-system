@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
-use App\Http\Requests\StoreCityRequest;
-use App\Http\Requests\UpdateCityRequest;
 use App\Http\Resources\city\CityCollection;
 
 class CityController extends Controller
@@ -14,7 +12,7 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): CityCollection
     {
         return new CityCollection(City::all());
     }

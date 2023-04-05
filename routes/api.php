@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\BloodTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,5 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::get('cities', [CityController::class, 'index']);
+
+Route::get('blood-types', [BloodTypeController::class, 'index']);
