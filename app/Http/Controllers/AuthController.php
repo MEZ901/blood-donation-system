@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\auth\LoginCollection;
+use App\Http\Resources\auth\LoginResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,14 +33,7 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        return response()->json([
-            'status' => 'success',
-            'user' => $user,
-            'authorization' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
-        ]);
+        return new LoginResource($user, $token);
     }
 
     public function register(Request $request)
@@ -51,7 +46,7 @@ class AuthController extends Controller
             'city_id' => 'required|integer|exists:cities,id',
             'blood_type_id' => 'required|integer|exists:blood_types,id',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed',
         ]);
 
         $user = User::create([
