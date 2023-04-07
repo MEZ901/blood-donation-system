@@ -33,7 +33,8 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        return new LoginResource($user, $token);
+        $user->token = $token; 
+        return new LoginResource($user);
     }
 
     public function register(Request $request)
