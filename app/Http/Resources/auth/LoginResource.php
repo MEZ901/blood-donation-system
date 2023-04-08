@@ -23,7 +23,7 @@ class LoginResource extends JsonResource
                 'age' => $this->age,
                 'cin' => $this->cin,
                 'city' => $this->city->name,
-                'blood_type' => $this->bloodType->name,
+                'blood_type' => $this->bloodType ? $this->bloodType->name : null,
                 'email' => $this->email,
             ],
             'authorization' => [

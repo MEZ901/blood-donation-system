@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('age');
             $table->string('cin')->unique();
             $table->foreignId('city_id')->constrained();
-            $table->foreignId('blood_type_id')->constrained();
+            $table->foreignId('blood_type_id')->nullable()->constrained();
             $table->string('email')->unique();
             $table->softDeletes();
             $table->timestamp('email_verified_at')->nullable();

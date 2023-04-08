@@ -45,19 +45,23 @@ class AuthController extends Controller
             'age' => 'required|integer',
             'cin' => 'required|string|max:255|unique:users',
             'city_id' => 'required|integer|exists:cities,id',
-            'blood_type_id' => 'required|integer|exists:blood_types,id',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
+
+        if ($request->blood_type_id) {
+            $request->validate([
+                'blood_type_id' => 'required|integer|exists:blood_types,id',
+            ]);
+        }
         
-        // dd($request->cin);
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'age' => $request->age,
             'cin' => $request->cin,
             'city_id' => $request->city_id,
-            'blood_type_id' => $request->blood_type_id,
+            'blood_type_id' => $request->blood_type_id ? $request->blood_type_id : null,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
