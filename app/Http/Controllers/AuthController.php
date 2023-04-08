@@ -43,18 +43,19 @@ class AuthController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'age' => 'required|integer',
-            'CIN' => 'required|string|max:255|unique:users',
+            'cin' => 'required|string|max:255|unique:users',
             'city_id' => 'required|integer|exists:cities,id',
             'blood_type_id' => 'required|integer|exists:blood_types,id',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
-
+        
+        // dd($request->cin);
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'age' => $request->age,
-            'CIN' => $request->CIN,
+            'cin' => $request->cin,
             'city_id' => $request->city_id,
             'blood_type_id' => $request->blood_type_id,
             'email' => $request->email,
@@ -62,15 +63,8 @@ class AuthController extends Controller
         ]);
 
         $token = Auth::login($user);
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User created successfully',
-            'user' => $user,
-            'authorization' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
-        ]);
+        $user->token = $token;
+        return new LoginResource($user);
     }
 
     public function logout()

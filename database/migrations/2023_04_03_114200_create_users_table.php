@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->integer('age');
-            $table->string('CIN')->unique();
+            $table->string('cin')->unique();
             $table->foreignId('city_id')->constrained();
             $table->foreignId('blood_type_id')->constrained();
             $table->string('email')->unique();
