@@ -76,8 +76,12 @@ class HospitalController extends Controller
      * @param  \App\Models\Hospital  $hospital
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hospital $hospital)
+    public function destroy(Hospital $hospital): JsonResponse
     {
-        //
+        $hospital->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Hospital deleted successfully',
+        ]);
     }
 }
