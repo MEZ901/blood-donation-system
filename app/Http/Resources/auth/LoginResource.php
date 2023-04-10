@@ -18,12 +18,12 @@ class LoginResource extends JsonResource
             'status' => 'success',
             'user' => [
                 'id' => $this->id,
-                'first_name' => $this->first_name,
-                'last_name' => $this->last_name,
+                'firstName' => $this->first_name,
+                'lastName' => $this->last_name,
                 'age' => $this->age,
                 'cin' => $this->cin,
                 'city' => $this->city->name,
-                'blood_type' => $this->bloodType ? $this->bloodType->name : null,
+                'bloodType' => $this->bloodType ? $this->bloodType->name : null,
                 'email' => $this->email,
             ],
             'authorization' => [

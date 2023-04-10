@@ -28,7 +28,7 @@ class AuthController extends Controller
         if (!$token) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Unauthorized',
+                'message' => 'Email or password is incorrect!',
             ], 401);
         }
 
