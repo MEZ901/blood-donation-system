@@ -13,7 +13,7 @@ class StoreHospitalRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreHospitalRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'city_id' => 'required|integer|exists:cities,id',
+            'user_id' => 'required|integer|exists:users,id',
         ];
     }
 }

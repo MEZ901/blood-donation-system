@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hospital;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreHospitalRequest;
 use App\Http\Requests\UpdateHospitalRequest;
+use App\Http\Resources\hospital\HospitalResource;
 use App\Http\Resources\hospital\HospitalCollection;
 
 class HospitalController extends Controller
@@ -14,7 +16,7 @@ class HospitalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): \Illuminate\Http\JsonResponse
+    public function index(): JsonResponse
     {
         $hospitals = Hospital::all();
         return response()->json([
@@ -29,9 +31,13 @@ class HospitalController extends Controller
      * @param  \App\Http\Requests\StoreHospitalRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreHospitalRequest $request)
+    public function store(StoreHospitalRequest $request): JsonResponse
     {
-        //
+        $hospital = Hospital::create($request->validated());
+        return response()->json([
+            'status' => 'success',
+            'data' => new HospitalResource($hospital),
+        ]);
     }
 
     /**
