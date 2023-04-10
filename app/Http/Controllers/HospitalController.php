@@ -46,9 +46,12 @@ class HospitalController extends Controller
      * @param  \App\Models\Hospital  $hospital
      * @return \Illuminate\Http\Response
      */
-    public function show(Hospital $hospital)
+    public function show(Hospital $hospital): JsonResponse
     {
-        //
+        return response()->json([
+            'status' => 'success',
+            'data' => new HospitalResource($hospital),
+        ]);
     }
 
     /**
