@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\BloodTypeController;
 
 /*
@@ -23,6 +24,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
 });
+
+Route::apiResource('hospitals', HospitalController::class);
 
 Route::get('cities', [CityController::class, 'index']);
 

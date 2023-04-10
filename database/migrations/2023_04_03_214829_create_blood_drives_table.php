@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('hospital_id')->constrained();
             $table->boolean('hasMinimumDonors');
             $table->string('status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

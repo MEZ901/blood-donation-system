@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
             AppointmentSeeder::class,
             BloodDriveSeeder::class,
             ReportSeeder::class,
+            RoleSeeder::class,
+            PermissionSeeder::class,
         ]);
     }
 }

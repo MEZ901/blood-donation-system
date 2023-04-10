@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->longText('content');
             $table->foreignId('user_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

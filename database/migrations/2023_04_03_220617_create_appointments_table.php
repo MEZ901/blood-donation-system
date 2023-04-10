@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('blood_drive_id')->nullable()->constrained();
             $table->foreignId('hospital_id')->nullable()->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
