@@ -13,7 +13,7 @@ class StoreBloodDriveRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class StoreBloodDriveRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'city_id' => 'required|integer|exists:cities,id',
+            'address' => 'required|string|max:255',
+            'date' => 'required|date',
+            'hospital_id' => 'required|integer|exists:hospitals,id',
+            'hasMinimumDonors' => 'required|boolean',
+            'status' => 'required|string|max:255',
         ];
     }
 }

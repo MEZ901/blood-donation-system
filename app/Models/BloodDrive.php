@@ -17,7 +17,8 @@ class BloodDrive extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'location',
+        'city_id',
+        'address',
         'date',
         'hospital_id',
         'hasMinimumDonors',
@@ -27,5 +28,15 @@ class BloodDrive extends Model
     public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function city(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function hospital(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Hospital::class);
     }
 }

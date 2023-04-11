@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\BloodDrive;
+use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreBloodDriveRequest;
 use App\Http\Requests\UpdateBloodDriveRequest;
+use App\Http\Resources\bloodDrive\BloodDriveResource;
+use App\Http\Resources\bloodDrive\BloodDriveCollection;
 
 class BloodDriveController extends Controller
 {
@@ -13,19 +16,13 @@ class BloodDriveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $bloodDerives = BloodDrive::all();
+        return response()->json([
+            'status' => 'success',
+            'data' => new BloodDriveCollection($bloodDerives),
+        ]);
     }
 
     /**
@@ -34,9 +31,13 @@ class BloodDriveController extends Controller
      * @param  \App\Http\Requests\StoreBloodDriveRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBloodDriveRequest $request)
+    public function store(StoreBloodDriveRequest $request): JsonResponse
     {
-        //
+        $bloodDrive = BloodDrive::create($request->all());
+        return response()->json([
+            'status' => 'success',
+            'data' => new BloodDriveResource($bloodDrive),
+        ]);
     }
 
     /**
@@ -45,20 +46,12 @@ class BloodDriveController extends Controller
      * @param  \App\Models\BloodDrive  $bloodDrive
      * @return \Illuminate\Http\Response
      */
-    public function show(BloodDrive $bloodDrive)
+    public function show(BloodDrive $bloodDrive): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\BloodDrive  $bloodDrive
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(BloodDrive $bloodDrive)
-    {
-        //
+        return response()->json([
+            'status' => 'success',
+            'data' => new BloodDriveResource($bloodDrive),
+        ]);
     }
 
     /**
@@ -68,9 +61,13 @@ class BloodDriveController extends Controller
      * @param  \App\Models\BloodDrive  $bloodDrive
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBloodDriveRequest $request, BloodDrive $bloodDrive)
+    public function update(UpdateBloodDriveRequest $request, BloodDrive $bloodDrive): JsonResponse
     {
-        //
+        $bloodDrive->update($request->all());
+        return response()->json([
+            'status' => 'success',
+            'data' => new BloodDriveResource($bloodDrive),
+        ]);
     }
 
     /**
@@ -79,8 +76,12 @@ class BloodDriveController extends Controller
      * @param  \App\Models\BloodDrive  $bloodDrive
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BloodDrive $bloodDrive)
+    public function destroy(BloodDrive $bloodDrive): JsonResponse
     {
-        //
+        $bloodDrive->delete();
+        return response()->json([
+            'status' => 'success',
+            'data' => 'Blood drive deleted successfully',
+        ]);
     }
 }

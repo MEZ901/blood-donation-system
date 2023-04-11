@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('blood_drives', function (Blueprint $table) {
             $table->id();
-            $table->string('location');
+            $table->foreignId('city_id')->constrained();
+            $table->string('address');
             $table->dateTime('date');
             $table->foreignId('hospital_id')->constrained();
             $table->boolean('hasMinimumDonors');
