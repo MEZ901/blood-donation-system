@@ -13,7 +13,7 @@ class StoreReportRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreReportRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'date' => 'required|date',
+            'content' => 'required|string',
+            'hospital_id' => 'required|integer|exists:hospitals,id',
         ];
     }
 }

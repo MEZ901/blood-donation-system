@@ -13,7 +13,7 @@ class UpdateReportRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateReportRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'date' => 'sometimes|required|date',
+            'content' => 'sometimes|required|string',
+            'hospital_id' => 'sometimes|required|integer|exists:hospitals,id',
         ];
     }
 }
