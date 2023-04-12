@@ -77,7 +77,7 @@ class AuthController extends Controller
 
         $image = null;
         if($request->profile) {
-            $image = (new ImageController)->store($request->profile, 'profile');
+            $image = (new ImageController)->store($request->profile, 'profile/');
             $user->image()->create([
                 'path' => $image,
             ]);
