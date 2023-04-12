@@ -9,56 +9,18 @@ use App\Http\Requests\UpdateImageRequest;
 class ImageController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreImageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreImageRequest $request)
+    public function store($imageData , $path): string
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Image $image)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Image  $image
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Image $image)
-    {
-        //
+        $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData));
+        $imageName = time() . '.png';
+        $imageDirectory = storage_path('app/public/images/'. $path . $imageName);
+        file_put_contents($imageDirectory, $image);
+        return "http://localhost:8000/storage/images/" . $path . $imageName;
     }
 
     /**

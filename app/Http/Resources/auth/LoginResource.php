@@ -14,12 +14,12 @@ class LoginResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [ 
-            'status' => 'success',
+        return [
             'user' => [
                 'id' => $this->id,
                 'firstName' => $this->first_name,
                 'lastName' => $this->last_name,
+                'profile' => $this->profile,
                 'age' => $this->age,
                 'cin' => $this->cin,
                 'city' => $this->city->name,

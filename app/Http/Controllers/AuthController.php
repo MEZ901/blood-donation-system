@@ -33,8 +33,17 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        $user->token = $token; 
-        return new LoginResource($user);
+
+        $image = $user->image()->first();
+        $profile = $image ? $image->path : null; 
+
+        $user->token = $token;
+        $user->profile = $profile;
+        
+        return [
+            "status" => "success",
+            "data" => new LoginResource($user)
+        ];
     }
 
     public function register(Request $request)
@@ -66,11 +75,25 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $image = null;
+        if($request->profile) {
+            $image = (new ImageController)->store($request->profile, 'profile');
+            $user->image()->create([
+                'path' => $image,
+            ]);
+        }
+
         $user->assignRole('donor');
 
         $token = Auth::login($user);
+        
         $user->token = $token;
-        return new LoginResource($user);
+        $user->profile = $image;
+
+        return [
+            "status" => "success",
+            "data" => new LoginResource($user)
+        ];
     }
 
     public function logout()
