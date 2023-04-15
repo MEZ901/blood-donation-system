@@ -19,7 +19,14 @@ class HospitalResource extends JsonResource
             'name' => $this->name,
             'city' => $this->city->name,
             'address' => $this->address,
-            'responsible' => $this->user->first_name . ' ' . $this->user->last_name,
+            'geographicCoordinate' => $this->geographic_coordinate,
+            'responsible' => [
+                'id' => $this->user->id,
+                'firstName' => $this->user->first_name,
+                'lastName' => $this->user->last_name,
+                'profile' => $this->user->image->path,
+                'phone' => $this->user->phone,
+            ],
         ];
     }
 }

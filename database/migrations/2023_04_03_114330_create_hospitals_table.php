@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
+            $table->longText('geographic_coordinate');
             $table->foreignId('city_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->softDeletes();

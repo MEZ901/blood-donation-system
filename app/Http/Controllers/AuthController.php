@@ -54,6 +54,7 @@ class AuthController extends Controller
             'age' => 'required|integer',
             'cin' => 'required|string|max:255|unique:users',
             'city_id' => 'required|integer|exists:cities,id',
+            'phone' => 'required|string|max:10|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -71,6 +72,7 @@ class AuthController extends Controller
             'cin' => $request->cin,
             'city_id' => $request->city_id,
             'blood_type_id' => $request->blood_type_id ? $request->blood_type_id : null,
+            'phone' => $request->phone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -88,7 +90,6 @@ class AuthController extends Controller
         $token = Auth::login($user);
         
         $user->token = $token;
-        $user->profile = $image;
 
         return [
             "status" => "success",

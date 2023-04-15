@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('city_id')->constrained();
             $table->foreignId('blood_type_id')->nullable()->constrained();
             $table->string('email')->unique();
+            $table->string('phone')->unique();
             $table->softDeletes();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

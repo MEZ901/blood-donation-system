@@ -25,11 +25,17 @@ class Hospital extends Model
         'address',
         'city_id',
         'user_id',
+        'geographic_coordinate',
     ];
 
     public function city(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

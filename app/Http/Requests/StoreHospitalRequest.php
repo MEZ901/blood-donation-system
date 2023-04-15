@@ -27,6 +27,7 @@ class StoreHospitalRequest extends FormRequest
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'city_id' => 'required|integer|exists:cities,id',
+            'geographic_coordinate' => 'required|string',
             'user_id' => 'required|integer|exists:users,id',
         ];
     }
