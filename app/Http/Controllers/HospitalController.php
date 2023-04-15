@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hospital;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreHospitalRequest;
 use App\Http\Requests\UpdateHospitalRequest;
@@ -16,13 +17,18 @@ class HospitalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): JsonResponse
-    {
-        $hospitals = Hospital::all();
-        return response()->json([
-            'status' => 'success',
-            'data' => new HospitalCollection($hospitals),
-        ]);
+    public function index(Request $request): HospitalCollection
+    {        
+        $query = Hospital::query();
+
+        if ($request->has('city_id')) {
+            $city = $request->input('city_id');
+            $query->where('city_id', $city);
+        }
+
+        $hospitals = $query->get();
+
+        return new HospitalCollection($hospitals);
     }
 
     /**
