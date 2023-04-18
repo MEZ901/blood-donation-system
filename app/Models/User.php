@@ -91,9 +91,9 @@ class User extends Authenticatable Implements JWTSubject
         return $this->belongsTo(BloodType::class);
     }
 
-    public function hospitals(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function hospital(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->belongsTo(Hospital::class);
+        return $this->hasOne(Hospital::class);
     }
 
     public function appointments(): \Illuminate\Database\Eloquent\Relations\HasMany

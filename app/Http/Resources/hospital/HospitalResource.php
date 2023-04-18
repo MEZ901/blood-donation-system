@@ -24,7 +24,7 @@ class HospitalResource extends JsonResource
                 'id' => $this->user->id,
                 'firstName' => $this->user->first_name,
                 'lastName' => $this->user->last_name,
-                'profile' => $this->user->image->path,
+                'profileImage' => $this->user->image->path,
                 'phone' => $this->user->phone,
             ],
         ];

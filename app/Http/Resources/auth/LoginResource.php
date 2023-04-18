@@ -19,7 +19,7 @@ class LoginResource extends JsonResource
                 'id' => $this->id,
                 'firstName' => $this->first_name,
                 'lastName' => $this->last_name,
-                'profile' => $this->image->path,
+                'profileImage' => $this->image->path,
                 'age' => $this->age,
                 'cin' => $this->cin,
                 'city' => $this->city->name,
