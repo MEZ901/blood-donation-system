@@ -20,7 +20,7 @@ class ImageController extends Controller
         $imageName = time() . '.png';
         $imageDirectory = storage_path('app/public/images/'. $path . $imageName);
         file_put_contents($imageDirectory, $image);
-        return "http://localhost:8000/storage/images/" . $path . $imageName;
+        return "http://bloodlink_backend.test/storage/images/" . $path . $imageName;
     }
 
     /**

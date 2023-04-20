@@ -90,7 +90,6 @@ class UserController extends Controller
 
         if ($request->profile) {
             if ($user->image) {
-                Storage::delete($user->image->path);
                 $user->image()->delete();
             }
 
@@ -107,8 +106,8 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        $user->hospital->delete();
-        $user->image->delete();
+        $user->hospital ? $user->hospital->delete() : null;
+        $user->image ? $user->image->delete() : null;
         $user->delete();
         return response()->json([
             'message' => 'User deleted successfully'
