@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->dateTime('date');
-            $table->float('quantity');
+            $table->string('status');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('blood_drive_id')->nullable()->constrained();
             $table->foreignId('hospital_id')->nullable()->constrained();

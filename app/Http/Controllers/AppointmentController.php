@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\appointment\AppointmentCollection;
+use App\Http\Resources\appointment\AppointmentResource;
 use App\Models\Appointment;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
@@ -13,19 +15,10 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): AppointmentCollection
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $appointments = Appointment::all();
+        return new AppointmentCollection($appointments);
     }
 
     /**
@@ -34,9 +27,13 @@ class AppointmentController extends Controller
      * @param  \App\Http\Requests\StoreAppointmentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAppointmentRequest $request)
+    public function store(StoreAppointmentRequest $request): \Illuminate\Http\JsonResponse
     {
-        //
+        $appointment = Appointment::create($request->validated());
+        return response()->json([
+            'message' => 'Appointment created successfully',
+            'data' => new AppointmentResource($appointment),
+        ], 201);
     }
 
     /**
@@ -45,20 +42,12 @@ class AppointmentController extends Controller
      * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function show(Appointment $appointment)
+    public function show(Appointment $appointment): \Illuminate\Http\JsonResponse
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Appointment $appointment)
-    {
-        //
+        $appointment = Appointment::findOrFail($appointment->id);
+        return response()->json([
+            'data' => new AppointmentResource($appointment),
+        ], 200);
     }
 
     /**
@@ -68,9 +57,13 @@ class AppointmentController extends Controller
      * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAppointmentRequest $request, Appointment $appointment)
+    public function update(UpdateAppointmentRequest $request, Appointment $appointment): \Illuminate\Http\JsonResponse
     {
-        //
+        $appointment->update($request->validated());
+        return response()->json([
+            'message' => 'Appointment updated successfully',
+            'data' => new AppointmentResource($appointment),
+        ], 200);
     }
 
     /**
@@ -79,8 +72,11 @@ class AppointmentController extends Controller
      * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Appointment $appointment)
+    public function destroy(Appointment $appointment) : \Illuminate\Http\JsonResponse
     {
-        //
+        $appointment->delete();
+        return response()->json([
+            'message' => 'Appointment deleted successfully',
+        ], 200);
     }
 }
