@@ -29,6 +29,12 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request): \Illuminate\Http\JsonResponse
     {
+        $appointmentCount = Appointment::where('date', $request->date)->count();
+        if ($appointmentCount >= 5) {
+            return response()->json([
+                'message' => 'There are already 5 appointments for this date',
+            ], 400);
+        }
         $appointment = Appointment::create($request->validated());
         return response()->json([
             'message' => 'Appointment created successfully',
@@ -59,6 +65,12 @@ class AppointmentController extends Controller
      */
     public function update(UpdateAppointmentRequest $request, Appointment $appointment): \Illuminate\Http\JsonResponse
     {
+        $appointmentCount = Appointment::where('date', $request->date)->count();
+        if ($appointmentCount >= 5) {
+            return response()->json([
+                'message' => 'There are already 5 appointments for this date',
+            ], 400);
+        }
         $appointment->update($request->validated());
         return response()->json([
             'message' => 'Appointment updated successfully',
