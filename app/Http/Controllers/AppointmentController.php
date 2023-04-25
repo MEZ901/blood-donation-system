@@ -35,6 +35,12 @@ class AppointmentController extends Controller
                 'message' => 'There are already 5 appointments for this date',
             ], 400);
         }
+        $userAppointments = Appointment::where('user_id', $request->user_id)->where('status', 'pending')->count();
+        if ($userAppointments >= 1) {
+            return response()->json([
+                'message' => 'You already have a pending appointment',
+            ], 400);
+        }
         $appointment = Appointment::create($request->validated());
         return response()->json([
             'message' => 'Appointment created successfully',
