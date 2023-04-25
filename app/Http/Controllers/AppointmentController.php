@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\appointment\AppointmentCollection;
-use App\Http\Resources\appointment\AppointmentResource;
 use App\Models\Appointment;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
+use App\Http\Resources\appointment\AppointmentResource;
+use App\Http\Resources\appointment\AppointmentCollection;
 
 class AppointmentController extends Controller
 {
@@ -15,8 +16,12 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): AppointmentCollection
+    public function index(Request $request): AppointmentCollection
     {
+        if ($request->has('user_id')) {
+            $appointments = Appointment::where('user_id', $request->user_id)->get();
+            return new AppointmentCollection($appointments);
+        }
         $appointments = Appointment::all();
         return new AppointmentCollection($appointments);
     }
