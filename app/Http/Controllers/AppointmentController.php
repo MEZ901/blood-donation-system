@@ -11,6 +11,9 @@ use App\Http\Resources\appointment\AppointmentCollection;
 
 class AppointmentController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth:api', 'role:donor']);
+    }
     /**
      * Display a listing of the resource.
      *

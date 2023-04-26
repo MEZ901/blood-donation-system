@@ -11,6 +11,9 @@ use App\Http\Resources\bloodDrive\BloodDriveCollection;
 
 class BloodDriveController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth:api', 'role:admin']);
+    }
     /**
      * Display a listing of the resource.
      *

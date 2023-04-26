@@ -12,6 +12,9 @@ use App\Http\Resources\hospital\HospitalCollection;
 
 class HospitalController extends Controller
 {
+    public function __construct() {
+        $this->middleware(['auth:api', 'role:sub_admin']);
+    }
     /**
      * Display a listing of the resource.
      *

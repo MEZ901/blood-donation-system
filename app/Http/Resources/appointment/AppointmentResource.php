@@ -19,7 +19,7 @@ class AppointmentResource extends JsonResource
             'date' => $this->date,
             'status' => $this->status,
             'user_id' => $this->user_id,
-            'blood_drive_id' => $this->blood_drive_id ? [
+            'blood_drive' => $this->blood_drive_id ? [
                 'id' => $this->bloodDrive->id,
                 'city_id' => $this->bloodDrive->city->name,
                 'address' => $this->bloodDrive->address,
@@ -28,7 +28,7 @@ class AppointmentResource extends JsonResource
                 'hasMinimumDonors' => $this->bloodDrive->hasMinimumDonors,
                 'status' => $this->bloodDrive->status,
             ] : null,
-            'hospital_id' => $this->hospital_id ? [
+            'hospital' => $this->hospital_id ? [
                 'id' => $this->hospital->id,
                 'name' => $this->hospital->name,
                 'city_id' => $this->hospital->city->name,
