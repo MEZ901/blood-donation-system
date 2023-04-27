@@ -26,6 +26,7 @@ class LoginResource extends JsonResource
                 'phone' => $this->phone,
                 'bloodType' => $this->bloodType ? $this->bloodType->name : null,
                 'email' => $this->email,
+                'roles' => $this->roles->pluck('name'),
             ],
             'authorization' => [
                 'token' => $this->token,

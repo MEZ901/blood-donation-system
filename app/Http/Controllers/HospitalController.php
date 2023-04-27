@@ -13,7 +13,7 @@ use App\Http\Resources\hospital\HospitalCollection;
 class HospitalController extends Controller
 {
     public function __construct() {
-        $this->middleware(['auth:api', 'role:sub_admin']);
+        $this->middleware(['auth:api', 'role:admin'])->except(['index', 'show']);
     }
     /**
      * Display a listing of the resource.
